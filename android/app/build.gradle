@@ -160,7 +160,6 @@ android {
 dependencies {
     compile project(':jcore-react-native')
     compile project(':jpush-react-native')
-    compile project(':react-native-device-info')
     compile project(':react-native-vector-icons')
     compile project(':react-native-gesture-handler')
     compile project(':react-native-fetch-blob')

@@ -27,8 +27,13 @@ import My from './pages/My/Index';
 import Publish from './pages/My/Publish'
 import Collection from './pages/My/Collection'
 import User from './pages/User'
+
+import Creat from './pages/Creat/index';
+import CreatTag from './pages/Creat/creat';
+import Cdetail from './pages/Creat/detail';
+
 const tabbaroption = {
-    activeTintColor: 'red',
+    activeTintColor: '#027fff',
     inactiveTintColor: '#999999',
     showIcon: true,
     style: {
@@ -73,7 +78,7 @@ const _configureTransition = () => {
 }
 const TabNavigaApp = TabNavigator({
     New: { screen: ScrollTabView },
-    Rand: { screen: ScrollTabViewRand },
+    Creat: { screen: Creat },
     My:{screen: My},
 },{
     lazy: true,
@@ -83,23 +88,7 @@ const TabNavigaApp = TabNavigator({
     backBehavior: 'none', // 按 back 键是否跳转到第一个Tab(首页)， none 为不跳转
     tabBarOptions: tabbaroption,
     configureTransition:()=>_configureTransition(),
-    tabBarComponent:props => <Tab {...props}/>,
-    // tabBarComponent:(props) => {
-    //     const { navigation, navigationState } = props;
-    //    // const _jumpToIndex = props.jumpToIndex; // Just in case
-    //     return (<TabBarBottom {...props} jumpToIndex={(index) => {
-    //         tab = navigationState.routes[index];
-    //         tabRoute = tab.routeName;
-    //         //firstRoute = tab.routes[0].routeName; // navState is Tabs object
-    //
-    //         const tabAction = NavigationActions.navigate({ routeName: tabRoute },{count:5});
-    //         {/*const firstScreenAction = NavigationActions.reset({ index: 0,*/}
-    //         {/*actions: [ NavigationActions.navigate({ routeName: firstRoute }) ]*/}
-    //         {/*});*/}
-    //         navigation.dispatch(tabAction);
-    //         //navigation.dispatch(firstScreenAction);
-    //     }} />)
-    // }
+    tabBarComponent:props => <Tab {...props}/>
 });
 const NavgationApp = StackNavigator({
     Home: {screen: Home},
@@ -110,8 +99,10 @@ const NavgationApp = StackNavigator({
     Publish: {screen: Publish},
     Collection: {screen: Collection},
     User: {screen: User},
+    CreatTag: {screen: CreatTag},
     SearchTag: {screen: SearchTag},
-    Search:{screen:Search}
+    Search:{screen:Search},
+    Cdetail:{screen:Cdetail}
 }, {initialRouteName: 'Index'});
 export default class Router extends React.Component {
     render() {

@@ -81,7 +81,7 @@
                                                    launchOptions:launchOptions];
   rootView.backgroundColor = [[UIColor alloc] initWithRed:1.0f green:1.0f blue:1.0f alpha:1];
   //友盟统计
-   [UMConfigure initWithAppkey:@"5acb970bb27b0a327b000093" channel:@"App Store"];
+   [UMConfigure initWithAppkey:@"5acbf2f9f43e487cc00002e5" channel:@"App Store"];
   [MobClick setScenarioType:E_UM_NORMAL];
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
   UIViewController *rootViewController = [UIViewController new];

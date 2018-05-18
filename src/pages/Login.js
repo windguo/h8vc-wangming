@@ -47,7 +47,7 @@ export default class Login extends React.Component {
                             <IconSimple name="arrow-left" size={20} color='white'/>
                         </View>
                     </TouchableOpacity>
-                    <Text style={{fontSize:17,textAlign:'center',fontWeight:'bold',lineHeight:43.7,color:'white'}}>哈吧会员登录</Text>
+                    <Text style={{fontSize:17,textAlign:'center',fontWeight:'bold',lineHeight:43.7,color:'white'}}>会员登录</Text>
                     <TouchableOpacity activeOpacity={1} onPress={() => {
                     }}>
                         <View style={{justifyContent:'center',marginRight:10,alignItems:'center',height:43.7,backgroundColor:'transparent',width:20}}>
@@ -158,7 +158,7 @@ export default class Login extends React.Component {
                     height:50,
                     justifyContent:'center',
                     alignItems:'center',
-                    backgroundColor:'#ff6600'
+                    backgroundColor:'#027fff'
                 }}>
                     <Text style={{fontSize:FONT(18),paddingTop:10,paddingBottom:10,backgroundColor:'transparent',color:'white',textAlign:'center'}}>立即登录</Text>
                 </View>
@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
 
 });
 const header = {
-    backgroundColor: '#C7272F',
+    backgroundColor: '#027fff',
     ...ifIphoneX({
         paddingTop: 44,
         height: 88

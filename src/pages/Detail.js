@@ -52,7 +52,7 @@ export  default  class Detail extends Component {
     }
     render() {
         return (
-            <Text style={{fontSize:18}}>{this.props.navigation.state.params.data && this.props.navigation.state.params.data.smalltext.replace(/\s+/g, "")}</Text>
+            <Text style={{fontSize:18}}>{this.props.navigation.state.params.data && this.props.navigation.state.params.data.title.replace(/\s+/g, "")}</Text>
         );
     }
 }

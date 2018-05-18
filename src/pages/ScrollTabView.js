@@ -58,21 +58,25 @@ export  default  class ScrollTabView extends Component {
     static navigationOptions = {
         tabBarLabel: '最新',
         tabBarIcon: ({tintColor,focused}) => (
-            <IconSimple name="fire" size={22} color={focused ? "red":'black'} />
+            <IconSimple name="fire" size={22} color={focused ? '#027fff':'black'} />
         ),
         header: ({navigation}) => {
             return (
-                <ImageBackground style={{...header}} resizeMode='cover'>
+                <ImageBackground style={{ ...header }} source={require('../assets/backgroundImageHeader.png')} resizeMode='cover'>
                     <TouchableOpacity activeOpacity={1} onPress={() => {
                         navigation.state.routes[0].routes[0].params.leftFuc && navigation.state.routes[0].routes[0].params.leftFuc();
                     }}>
-                        
+                        <View style={{ justifyContent: 'center', marginLeft: 10, alignItems: 'center', height: 43.7 }}>
+                            <MaterialIcons name="search" size={25} color='white' />
+                        </View>
                     </TouchableOpacity>
-                    <Text style={{fontSize: 17, textAlign: 'center', lineHeight: 43.7, color: 'white'}}>网名大全</Text>
+                    <Text style={{ fontSize: 17, textAlign: 'center', lineHeight: 43.7, color: 'white', fontWeight: '100' }}>签名大全</Text>
                     <TouchableOpacity activeOpacity={1} onPress={() => {
                         navigation.state.routes[0].routes[0].params.rightFuc && navigation.state.routes[0].routes[0].params.rightFuc();
                     }}>
-                        
+                        <View style={{ justifyContent: 'center', marginRight: 10, alignItems: 'center', height: 43.7 }}>
+                            
+                        </View>
                     </TouchableOpacity>
                 </ImageBackground>
             )
@@ -141,7 +145,7 @@ export  default  class ScrollTabView extends Component {
         }
         SplashScreen.hide();
         this.CodePushSync();
-        WeChat.registerApp('wxd750cac4fb66b983');
+        WeChat.registerApp('wx5561ddf8b8d73746');
         this.props.navigation.setParams({
             rightFuc: () => {
                 let url = '';
@@ -198,30 +202,6 @@ export  default  class ScrollTabView extends Component {
             JPushModule.setupPush();
             JPushModule.setBadge(0, success => {})
         }
-
-        // JPushModule.addReceiveCustomMsgListener(map => {
-        //     console.log('JPushModule CustomMsgextras: ' + map.extras)
-        //     console.log('JPushModule CustomMsg',map.toString());
-        // })
-
-        // JPushModule.addReceiveNotificationListener(map => {
-        //     console.log('JPushModule Notification alertContent: ' + map.alertContent)
-        //     console.log('JPushModule Notification extras: ' + map.extras)
-        //    /// var extra = JSON.parse(map.extras);
-        //     console.log("JPushModule Notification",extra.key + ": " + extra.value);
-        // })
-
-        //点击回调这个函数
-        // JPushModule.addReceiveOpenNotificationListener(map => {
-        //     console.log('JPushModule Openingnotification!')
-        //     console.log('JPushModule map.extra: ' + map.extras)
-        //     this.jumpToOther()
-        //     // JPushModule.jumpToPushActivity("SecondActivity");
-        // })
-
-        // JPushModule.addGetRegistrationIdListener(registrationId => {
-        //     console.log('JPushModule Device register succeed, registrationId ' + registrationId)
-        // })
     }
 
     componentWillUnmount() {
@@ -378,7 +358,7 @@ export  default  class ScrollTabView extends Component {
                 }
             })
 
-            return <ScrollableTabBar activeTextColor='red' underlineStyle={{height: 0,width:0}}
+            return <ScrollableTabBar activeTextColor='#027fff' underlineStyle={{height: 0,width:0}}
                                      backgroundColor='white' textStyle={{fontSize: 16, fontWeight:'100'}}
                                      tabStyle={{paddingLeft: 10, paddingRight: 10}} />;
         }
@@ -436,7 +416,7 @@ export  default  class ScrollTabView extends Component {
                             width: 250,
                             justifyContent: 'center'
                         }}>
-                            <Text style={{fontSize: 16, color: 'red', textAlign: 'center'}}>下载</Text>
+                            <Text style={{fontSize: 16, color: '#027fff', textAlign: 'center'}}>下载</Text>
                         </View></View></TouchableOpacity> :  <View style={{flexDirection: 'row'}}>
                         <TouchableOpacity activeOpacity={1} onPress={this.clickDownload}>
                             <View style={{
@@ -446,7 +426,7 @@ export  default  class ScrollTabView extends Component {
                                 width: 125,
                                 justifyContent: 'center'
                             }}>
-                                <Text style={{fontSize: 16, color: 'red', textAlign: 'center'}}>下载</Text>
+                                <Text style={{fontSize: 16, color: '#027fff', textAlign: 'center'}}>下载</Text>
                             </View></TouchableOpacity>
                         <TouchableOpacity activeOpacity={1} onPress={this.clickToCancelModal}><View style={{
                             borderTopWidth: 1,
@@ -478,7 +458,7 @@ export  default  class ScrollTabView extends Component {
                         width: 250,
                         justifyContent: 'center'
                     }}>
-                        <Text style={{fontSize: 16, color: 'red', textAlign: 'center'}}>立即更新</Text>
+                        <Text style={{fontSize: 16, color: '#027fff', textAlign: 'center'}}>立即更新</Text>
                     </View></View></TouchableOpacity> :  <View style={{flexDirection: 'row'}}>
                         <TouchableOpacity activeOpacity={1} onPress={this.clickDownload}>
                         <View style={{
@@ -488,7 +468,7 @@ export  default  class ScrollTabView extends Component {
                             width: 125,
                             justifyContent: 'center'
                         }}>
-                            <Text style={{fontSize: 16, color: 'red', textAlign: 'center'}}>立即更新</Text>
+                            <Text style={{fontSize: 16, color: '#027fff', textAlign: 'center'}}>立即更新</Text>
                         </View></TouchableOpacity>
                         <TouchableOpacity activeOpacity={1} onPress={this.clickToCancelModal}><View style={{
                             borderTopWidth: 1,
@@ -536,7 +516,7 @@ export  default  class ScrollTabView extends Component {
 
 }
     const header = {
-        backgroundColor: '#C7272F',
+        backgroundColor: '#027fff',
         ...ifIphoneX({
             paddingTop: 44,
             height: 88

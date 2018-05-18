@@ -53,23 +53,27 @@ import HttpUtil from  '../utils/HttpUtil';
 // <Image source={require('../assets/reload.png')} style={{width: 25, height: 25}}/>
 export  default  class ScrollTabView extends Component {
     static navigationOptions = {
-        tabBarLabel: '随机',
+        tabBarLabel: '推荐',
         tabBarIcon: ({tintColor,focused}) => (
-            <IconSimple name="shuffle" size={22} color={focused ? "red":'black'} />
+            <IconSimple name="shuffle" size={22} color={focused ? '#027fff':'black'} />
         ),
         header: ({navigation}) => {
             return (
-                <ImageBackground style={{...header}} resizeMode='cover'>
+                <ImageBackground style={{ ...header }} source={require('../assets/backgroundImageHeader.png')} resizeMode='cover'>
                     <TouchableOpacity activeOpacity={1} onPress={() => {
-                        navigation.state.routes[0].routes[1].params.leftFuc && navigation.state.routes[0].routes[1].params.leftFuc();
+                        navigation.state.routes[0].routes[0].params.leftFuc && navigation.state.routes[0].routes[0].params.leftFuc();
                     }}>
-                        
+                        <View style={{ justifyContent: 'center', marginLeft: 10, alignItems: 'center', height: 43.7 }}>
+                            <MaterialIcons name="search" size={25} color='white' />
+                        </View>
                     </TouchableOpacity>
-                    <Text style={{fontSize: 17, textAlign: 'center', lineHeight: 43.7, color: 'white'}}>网名大全</Text>
+                    <Text style={{ fontSize: 17, textAlign: 'center', lineHeight: 43.7, color: 'white', fontWeight: '100' }}>签名大全</Text>
                     <TouchableOpacity activeOpacity={1} onPress={() => {
-                        navigation.state.routes[0].routes[1].params.rightFuc && navigation.state.routes[0].routes[1].params.rightFuc();
+                        navigation.state.routes[0].routes[0].params.rightFuc && navigation.state.routes[0].routes[0].params.rightFuc();
                     }}>
-                        
+                        <View style={{ justifyContent: 'center', marginRight: 10, alignItems: 'center', height: 43.7 }}>
+                            
+                        </View>
                     </TouchableOpacity>
                 </ImageBackground>
             )
@@ -230,7 +234,7 @@ export  default  class ScrollTabView extends Component {
                 }
             })
 
-            return <ScrollableTabBar activeTextColor='red' underlineStyle={{height: 0,width:0}}
+            return <ScrollableTabBar activeTextColor='#027fff' underlineStyle={{height: 0,width:0}}
                                      backgroundColor='white' textStyle={{fontSize: 16, fontWeight:'100'}}
                                      tabStyle={{paddingLeft: 10, paddingRight: 10}} />;
         }
@@ -288,7 +292,7 @@ export  default  class ScrollTabView extends Component {
     }
     }
     const header = {
-        backgroundColor: '#C7272F',
+        backgroundColor: '#027fff',
         ...ifIphoneX({
             paddingTop: 44,
             height: 88

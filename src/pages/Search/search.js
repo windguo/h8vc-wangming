@@ -54,7 +54,7 @@ export default class Search extends Component {
     static navigationOptions = {
         tabBarLabel: '搜索',
         tabBarIcon: ({ tintColor, focused }) => (
-            <IconSimple name="user" size={22} color={focused ? "red" : 'black'} />
+            <IconSimple name="user" size={22} color={focused ? '#027fff' : 'black'} />
         ),
         header: ({ navigation }) => {
             let textinput;
@@ -223,8 +223,8 @@ export default class Search extends Component {
                 if (isInstalled) {
                     if (data.wechat === 1) {
                         WeChat.shareToSession({
-                            title: "【哈吧笑话分享】",
-                            description: this._shareItem && this._shareItem.smalltext.replace(/^(\r\n)|(\n)|(\r)/,""),
+                            title: "【签名分享】",
+                            description: this._shareItem && this._shareItem.title.replace(/^(\r\n)|(\n)|(\r)/,""),
                             type: 'news',
                             webpageUrl: urlConfig.DetailUrl + this._shareItem.classid + '/' + this._shareItem.id,
                             thumbImage: urlConfig.thumbImage,
@@ -235,8 +235,8 @@ export default class Search extends Component {
                         });
                     } else if(data.wechat === 2){
                         WeChat.shareToTimeline({
-                            title: "【哈吧笑话分享】" + this._shareItem && this._shareItem.smalltext.replace(/^(\r\n)|(\n)|(\r)/,""),
-                            description: this._shareItem && this._shareItem.smalltext.replace(/^(\r\n)|(\n)|(\r)/,""),
+                            title: "【签名分享】" + this._shareItem && this._shareItem.title.replace(/^(\r\n)|(\n)|(\r)/,""),
+                            description: this._shareItem && this._shareItem.title.replace(/^(\r\n)|(\n)|(\r)/,""),
                             type: 'news',
                             webpageUrl: urlConfig.DetailUrl + this._shareItem.classid + '/' + this._shareItem.id,
                             thumbImage: urlConfig.thumbImage,
@@ -258,18 +258,14 @@ export default class Search extends Component {
         this.props.navigation.navigate('Web', {url:url});
         this.close();
     }
-    clickToFavas = (classid,id) => {
-        let url = urlConfig.FavasURL + '/' + classid + '/' + id;
-        this.props.navigation.navigate('Web', { url: url });
-    }
     clickToShare = (type) => {
         this.close();
         WeChat.isWXAppInstalled().then((isInstalled) => {
             if (isInstalled) {
                 if (type === 'Session') {
                     WeChat.shareToSession({
-                        title: "【哈吧笑话分享】",
-                        description: this._shareItem && this._shareItem.smalltext.replace(/^(\r\n)|(\n)|(\r)/,""),
+                        title: "【签名分享】",
+                        description: this._shareItem && this._shareItem.title.replace(/^(\r\n)|(\n)|(\r)/,""),
                         type: 'news',
                         webpageUrl: urlConfig.DetailUrl + this._shareItem.classid + '/' + this._shareItem.id,
                         thumbImage: urlConfig.thumbImage,
@@ -278,8 +274,8 @@ export default class Search extends Component {
                     }});
                 } else {
                     WeChat.shareToTimeline({
-                        title: "【哈吧笑话分享】" + this._shareItem && this._shareItem.smalltext.replace(/^(\r\n)|(\n)|(\r)/,""),
-                        description: this._shareItem && this._shareItem.smalltext.replace(/^(\r\n)|(\n)|(\r)/,""),
+                        title: "【签名分享】" + this._shareItem && this._shareItem.title.replace(/^(\r\n)|(\n)|(\r)/,""),
+                        description: this._shareItem && this._shareItem.title.replace(/^(\r\n)|(\n)|(\r)/,""),
                         type: 'news',
                         webpageUrl: urlConfig.DetailUrl + this._shareItem.classid + '/' + this._shareItem.id,
                         thumbImage: urlConfig.thumbImage,
@@ -408,7 +404,7 @@ export default class Search extends Component {
             let DeepCopyData = [].concat(JSON.parse(JSON.stringify(this.FlatListData)));
             DeepCopyData[index].isCopyed = true;
             this.flatList.setData(DeepCopyData);
-            Clipboard.setString(item.smalltext && item.smalltext.replace(/^(\r\n)|(\n)|(\r)/,"") + urlConfig.DetailUrl + item.classid + '/' + item.id);
+            Clipboard.setString(item.title && item.title.replace(/^(\r\n)|(\n)|(\r)/,"") + urlConfig.DetailUrl + item.classid + '/' + item.id);
             Toast.show('复制成功', {
                 duration: Toast.durations.SHORT,
                 position: Toast.positions.CENTER,
@@ -464,49 +460,43 @@ export default class Search extends Component {
             this.ToastShow(message);
         }catch (e){}
     }
-    renderTextAndImage = (item,index) => {
-        if (item.classid === '39'|| item.classid === '41'){
-            return  <View>
+    renderTextAndImage = (item, index) => {
+        if (item.classid == '80' || item.classid == '85' || item.classid == '86' || item.classid == '87'){
+            return <View>
                 <Text style={{
-                    fontSize: 16,
+                    fontSize: 18,
                     lineHeight: 26,
-                    color:item.isCopyed ? '#666666' : 'black',
-                    fontWeight:'300'
-                }} onPress={()=>{this.setClipboardContent(item.smalltext && item.smalltext,index,item)}}>{item.smalltext && item.smalltext.replace(/^(\r\n)|(\n)|(\r)/,"")}</Text>
-                {item.pic_urls ? <CustomImage titlepic={item.titlepic} pic_urls={item.pic_urls} style={{marginTop:10}}
-                /> : <View/> }
+                    color: item.isCopyed ? '#666666' : 'black',
+                    paddingTop: 10,
+                    paddingBottom: 10,
+                    fontWeight: '300'
+                }} onPress={() => { this.setClipboardContent(item.title && item.title, index, item) }}>
+                    {item.title && item.title.replace(/^(\r\n)|(\n)|(\r)/, "")}{'\n'}                     {item.ftitle && item.ftitle.replace(/^(\r\n)|(\n)|(\r)/, "")}{'\n'}
+                    {item.ftitle && item.ftitle.replace(/^(\r\n)|(\n)|(\r)/, "")}
+                </Text>
             </View>
-        }else if( item.classid === '42'){
-            return  <View>
-                {item.titlepic ? <AutoHeightImage
-                    width={WIDTH-40}
-                    source = {{uri:item.titlepic}}
-                /> : <View/> }
-            </View>
-        }else if (item.classid === '44') {
-            return   <View>
+        } else {
+            return <View>
                 <Text style={{
-                    fontSize: 16,
+                    fontSize: 18,
                     lineHeight: 26,
-                    color:item.isCopyed ? '#666666' : 'black',
-                    fontWeight:'300'
-                }} onPress={()=>{this.setClipboardContent(item.smalltext && item.smalltext,index,item)}}>{item.smalltext && item.smalltext.replace(/^(\r\n)|(\n)|(\r)/,"")}</Text>
-                <GuessText style={{fontSize:16,color:Color.redColor,marginTop:10}} item={item}>查看答案</GuessText>
-            </View>
-        }else {
-            return  <View>
-                <Text style={{
-                    fontSize: 16,
-                    lineHeight: 26,
-                    color:item.isCopyed ? '#666666' : 'black',
-                    fontWeight:'300'
-                }} onPress={()=>{this.setClipboardContent(item.smalltext && item.smalltext,index,item)}}>{item.smalltext && item.smalltext.replace(/^(\r\n)|(\n)|(\r)/,"")}</Text>
+                    color: item.isCopyed ? '#666666' : 'black',
+                    paddingBottom: 10,
+                    fontWeight: '300'
+                }} onPress={() => { this.setClipboardContent(item.title && item.title, index, item) }}>
+                    {item.title && item.title.replace(/^(\r\n)|(\n)|(\r)/, "")}{'\n'}
+                    {item.ftitle && item.ftitle.replace(/^(\r\n)|(\n)|(\r)/, "")}
+                </Text>
             </View>
         }
     }
     clickToFavas = (classid,id) => {
         let url = urlConfig.FavasURL + '/' + classid + '/' + id;
-        this.props.navigation.navigate('Web', { url: url });
+        if (global.userInfo) {
+            this.props.navigation.navigate('Web', { url: url });
+        } else {
+            this.props.navigation.navigate('Login');
+        }
     }
     _renderItem = ({item, index}) => {
         if (item.adType && item.picUrl) {
@@ -540,11 +530,11 @@ export default class Search extends Component {
                                     userid: item.userid
                                 });
                             }}>
-                                (O ^
+                                ^
                                 <Text>
                                     {item.username}
                                 </Text>
-                                ^ O)
+                                ^
                             </Text>
                         </View>
                         <View style={{ flexDirection: 'row' }}>
@@ -554,7 +544,7 @@ export default class Search extends Component {
                                     color: '#666666',
                                     fontWeight: '100'
                                 }}>
-                                    {formatData(parseInt(item.newstime))}
+                                    
                                 </Text>
                             </View>
                         </View>
@@ -568,25 +558,34 @@ export default class Search extends Component {
                                 marginBottom:15,
                                 justifyContent: 'space-between',
                             }}>
-                            <View style={{flexDirection: 'row'}}>
-                                <TouchableOpacity activeOpacity={1}
-                                                  onPress={() => {
-                                                      this.clickToFavas(item.classid, item.id)
-                                                  }}
-                                                  hitSlop={{ left: 10, right: 10, top: 10, bottom: 10 }}>
-                                    <IconSimple name="wallet" size={15} color='#5C5C5C' />
-                                </TouchableOpacity>
+                            <View style={{ flexDirection: 'row' }}>
+                                {item.classname ? <Text style={{
+                                    paddingHorizontal: 6,
+                                    paddingVertical: 2,
+                                    borderWidth: 1,
+                                    borderRadius: 10,
+                                    paddingLeft: 10,
+                                    paddingRight: 10,
+                                    fontWeight: '100',
+                                    borderColor: '#eee'
+                                }}
+                                    onPress={() => {
+                                        this.props.pageNumber(parseInt(item.classid))
+                                    }}>
+                                    {item.classname && item.classname}
+                                </Text> : <View />}
+
                             </View>
                             <View style={{flexDirection: 'row'}}>
                                 <View style={{flexDirection: 'row',marginLeft: 10}}>
                                     <TouchableOpacity activeOpacity={1} onPress={()=>{this.PostThumb(item,1,index)}} hitSlop={{left:10,right:10,top:10,bottom:10}}>
-                                        {item.isLike ?   <IconSimple name="like" size={15} color='red'/> : <IconSimple name="like" size={15} color='#5C5C5C'/>}
+                                        {item.isLike ?   <IconSimple name="like" size={15} color='#027fff'/> : <IconSimple name="like" size={15} color='#5C5C5C'/>}
                                     </TouchableOpacity>
                                     <Text style={{marginLeft: 5,fontWeight:'100'}}>{item.diggtop && item.diggtop}</Text>
                                 </View>
                                 <View style={{flexDirection: 'row', marginLeft: 10}}>
                                     <TouchableOpacity activeOpacity={1} onPress={()=>{this.PostThumb(item,0,index)}} hitSlop={{left:10,right:10,top:10,bottom:10}}>
-                                        {item.isUnLike ?   <IconSimple name="dislike" size={15} color='red'/> : <IconSimple name="dislike" size={15} color='#5C5C5C'/>}
+                                        {item.isUnLike ?   <IconSimple name="dislike" size={15} color='#027fff'/> : <IconSimple name="dislike" size={15} color='#5C5C5C'/>}
                                     </TouchableOpacity>
                                     <Text style={{marginLeft: 5,fontWeight:'100'}}>{item.diggbot && item.diggbot}</Text>
                                 </View>
@@ -630,7 +629,7 @@ export default class Search extends Component {
 
 }
 const header = {
-    backgroundColor: '#C7272F',
+    backgroundColor: '#027fff',
     ...ifIphoneX({
         paddingTop: 44,
         height: 88

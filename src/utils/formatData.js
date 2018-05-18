@@ -17,7 +17,7 @@ function formateData(publishTime) {
         return d_minutes + "分钟前";
     } else    if (d_hours <= 0 && d > 0 && d < 60) {
         return d + '秒前';
-    }else{
+    }else if(d){
        return '3天前';
     }
 }
